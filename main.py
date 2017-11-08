@@ -11,6 +11,14 @@ def user_input(message, error_message):
     return user_input
 # einde get_stations def
 
+# def zoek_in_reisinformatie(stations_lijst):
+#     zoek_resultaten = []
+#     zoek_creteria = user_input("U kunt zoeken op basis van tijd of station naam: ", "Oops er zijn geen passsende resulaten")
+#     for station in stations_lijst:
+#         if zoek_creteria in station:
+#             zoek_resultaten.append(station)
+#     print(zoek_resultaten)
+
 def update_settings():
     settings_lijst = []
     username = input("Username: ")
@@ -38,6 +46,7 @@ def update_settings():
 # einde update_settings def
 
 def get_vertrek_informatie(station):  # Haalt de actuele NS reisinformatie
+    reisinformatie_lijst = []
     auth_details = ('max.bosch@student.hu.nl', '9bftbs4MpvNZ2Q-WJe70aKE1c3gm4Kef23ekTq6r9-U8ddVTNWUkYw') # Inloggegevens API
     api_url = 'http://webservices.ns.nl/ns-api-avt?station=' + station  # URL van API die opgehaald moet worden
     response = requests.get(api_url, auth = auth_details)   # Wat de API terug geeft
@@ -47,7 +56,6 @@ def get_vertrek_informatie(station):  # Haalt de actuele NS reisinformatie
 
     print('\nDit zijn de vertrkkende treinen:')
     for vertrek in vertrek_xml['ActueleVertrekTijden']['VertrekkendeTrein']:
-
         # XML key routetekst is in een try omdat het er niet altijd is
         try:
             trein_tussen_stops = ",\nVia " + vertrek['RouteTekst']
@@ -60,6 +68,20 @@ def get_vertrek_informatie(station):  # Haalt de actuele NS reisinformatie
             reis_tip = "\nReistip: " + vertrek['ReisTip']
         except KeyError:
             reis_tip = ""    
+        # XML key reistip is in een try omdat het er niet altijd is
+
+        # XML key reistip is in een try omdat het er niet altijd is
+        try:
+            vertrek_vertraging_tekst = "\nVertraging: " + vertrek['VertrekVertragingTekst']
+        except KeyError:
+            vertrek_vertraging_tekst = ""    
+        # XML key reistip is in een try omdat het er niet altijd is 
+
+        # XML key reistip is in een try omdat het er niet altijd is
+        try:
+            opmerkingen = "\nOpmerkingen: " + vertrek['Opmerkingen']['Opmerking']
+        except KeyError:
+            opmerkingen = ""    
         # XML key reistip is in een try omdat het er niet altijd is    
 
         type_trein = vertrek['TreinSoort'] #XML key de trein soort
@@ -67,7 +89,12 @@ def get_vertrek_informatie(station):  # Haalt de actuele NS reisinformatie
         eindbestemming = vertrek['EindBestemming'] #XML key
         vertrektijd = vertrek['VertrekTijd'] #XML key no sliced string dus bv. 016-09-27T18:36:00+0200
         vertrektijd = vertrektijd[11:16] #slice die string naar bv. 18:36.
-        print("Om {} van spoor {} vertrekt een {} naar {}{}{} \n" .format(vertrektijd, vertrekspoor, type_trein, eindbestemming, trein_tussen_stops,reis_tip))
+        print("Om {} van spoor {} vertrekt een {} naar {}{}{}{}{} \n" .format(vertrektijd, vertrekspoor, type_trein, eindbestemming, trein_tussen_stops, vertrek_vertraging_tekst, reis_tip, opmerkingen))
+
+        # reisinformatie_resultaat = "Om" +vertrektijd+ "van spoor" +vertrekspoor+ "vertrekt een" +type_trein+ ""
+        # reisinformatie_lijst.append(vertrektijd)
+    # print(reisinformatie_lijst)
+    # zoek_in_reisinformatie(reisinformatie_lijst)
 # einde get_vertrek_informatie def
 
 def hudige_vertrek_station():
@@ -104,4 +131,4 @@ def ander_vertrek_station():
 # einde ander_vertrek_station def
 
 hudige_vertrek_station() #reis informatie hudige vertrek station werkt met settings file.. staat nu op utrecht.. settings md5 encrypten??
-ander_vertrek_station()  #reis informatie andere vertrek station
+# ander_vertrek_station()  #reis informatie andere vertrek station
