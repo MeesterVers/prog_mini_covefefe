@@ -103,7 +103,7 @@ def hudige_vertrek_station():
     settings = read_settings_file.readlines()
     read_settings_file.close()
     hudige_station = settings[1]
-    get_vertrek_informatie(hudige_station)
+    return get_vertrek_informatie(hudige_station)
 # get_hudige_station def
 
 def ander_vertrek_station():
@@ -131,5 +131,5 @@ def ander_vertrek_station():
         get_vertrek_informatie(user_station)
 # einde ander_vertrek_station def
 
-hudige_vertrek_station() #reis informatie hudige vertrek station werkt met settings file.. staat nu op utrecht.. settings md5 encrypten??
+# hudige_vertrek_station() #reis informatie hudige vertrek station werkt met settings file.. staat nu op utrecht.. settings md5 encrypten??
 # ander_vertrek_station()  #reis informatie andere vertrek station
