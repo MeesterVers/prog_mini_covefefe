@@ -95,6 +95,7 @@ def get_vertrek_informatie(station):  # Haalt de actuele NS reisinformatie
     #         print("Reis advies: " + reis_informatie[6])
     #     if reis_informatie[7] != "":
     #         print("Opmerking: " + reis_informatie[7])
+    print(reis_informatie_lijst)
     return reis_informatie_lijst
 # einde get_vertrek_informatie def
 
@@ -106,29 +107,24 @@ def hudige_vertrek_station():
     return get_vertrek_informatie(hudige_station)
 # get_hudige_station def
 
-def ander_vertrek_station():
-    user_station = user_input("Van welk station wilt u reisinformatie? ", "Oops u heeft geen station ingevuld")
-    mogelijke_stations = []
-    auth_details = ('max.bosch@student.hu.nl', '9bftbs4MpvNZ2Q-WJe70aKE1c3gm4Kef23ekTq6r9-U8ddVTNWUkYw') # Inloggegevens API
-    api_url = 'http://webservices.ns.nl/ns-api-stations-v2?_ga=2.25077050.162201735.1509967012-522547314.1504624410' # Station lijst API
-    response = requests.get(api_url, auth = auth_details)   # Wat de API terug geeft
-    stations_xml = xmltodict.parse(response.text)
+def ander_vertrek_station(user_station, request_status):
 
-    for station in stations_xml['Stations']['Station']:
-        if user_station in station['Namen']['Lang']:
-            mogelijke_stations.append(station['Namen']['Lang'])
+    if request_status == "bad":
+        mogelijke_stations = []
+        auth_details = ('max.bosch@student.hu.nl', '9bftbs4MpvNZ2Q-WJe70aKE1c3gm4Kef23ekTq6r9-U8ddVTNWUkYw') # Inloggegevens API
+        api_url = 'http://webservices.ns.nl/ns-api-stations-v2?_ga=2.25077050.162201735.1509967012-522547314.1504624410' # Station lijst API
+        response = requests.get(api_url, auth = auth_details)   # Wat de API terug geeft
+        stations_xml = xmltodict.parse(response.text)
 
-    if len(mogelijke_stations) > 1:
-        print("Oops er zijn meerdere stations met de naam {}" .format(user_station))
-        for station in mogelijke_stations:
-            print("{}.{}." .format(mogelijke_stations.index(station)+1 , station))
-        user_station = user_input("Zou u een van de stations in het lijstje kunnen kiezen? ", "Oops u heeft geen station ingevuld")
-        get_vertrek_informatie(user_station)
-    elif len(mogelijke_stations) == 0:
-        print("Oops station {} bestaat niet" .format(user_station))
-    else:
-        user_station = station['Namen']['Lang']
-        get_vertrek_informatie(user_station)
+        for station in stations_xml['Stations']['Station']:
+            if user_station in station['Namen']['Lang']:
+                mogelijke_stations.append(station['Namen']['Lang'])
+        return mogelijke_stations
+
+    elif request_status == "good":
+        return get_vertrek_informatie(user_station)
+    print(mogelijke_stations)
+    
 # einde ander_vertrek_station def
 
 # hudige_vertrek_station() #reis informatie hudige vertrek station werkt met settings file.. staat nu op utrecht.. settings md5 encrypten??
