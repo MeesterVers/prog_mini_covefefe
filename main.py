@@ -95,7 +95,6 @@ def get_vertrek_informatie(station):  # Haalt de actuele NS reisinformatie
     #         print("Reis advies: " + reis_informatie[6])
     #     if reis_informatie[7] != "":
     #         print("Opmerking: " + reis_informatie[7])
-    print(reis_informatie_lijst)
     return reis_informatie_lijst
 # einde get_vertrek_informatie def
 
