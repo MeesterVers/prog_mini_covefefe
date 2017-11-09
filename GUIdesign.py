@@ -1,9 +1,10 @@
 from tkinter import * #imports
 from PIL import Image, ImageTk
 from main import *
+
 root = Tk()     #creeer het hoofdscherm
 root.geometry("1200x700")           #zet de grootte van de window
-root.resizable(width=False, height=False)       #zorgt ervoor dat de grootte niet aangepast kan worden
+root.resizable(width=True, height=True)       #zorgt ervoor dat de grootte niet aangepast kan worden
 
 def huidige_station():
     row = 0
@@ -12,58 +13,62 @@ def huidige_station():
     buttonframe.pack_forget()
     labelframe.pack()
 
+    informatie_frame = Frame(master=root)
+    informatie_frame.pack(side=LEFT, padx=10)
+
     button3.pack()
 
-    vertrektijd = Label(master=labelframe, text="Vertrek tijd", font=('Helvetica', 16, 'bold'))
-    vertrektijd.grid(pady=10, row=row, column=1)
+    vertrektijd = Label(master=informatie_frame, text="Vertrek tijd", font=('Helvetica', 14, 'bold'))
+    vertrektijd.grid(pady=10, row=row, column=1,)
 
-    spoor = Label(master=labelframe, text="Spoor", font=('Helvetica', 16, 'bold'))
+    spoor = Label(master=informatie_frame, text="Spoor", font=('Helvetica', 14, 'bold'))
     spoor.grid(pady=10, row=row, column=2)
 
-    type_trein = Label(master=labelframe, text="Type trein", font=('Helvetica', 16, 'bold'))
-    type_trein.grid(pady=10, row=row, column=2)
+    type_trein = Label(master=informatie_frame, text="Type trein", font=('Helvetica', 14, 'bold'))
+    type_trein.grid(pady=10, row=row, column=3, sticky=W)
 
-    eindbestemming = Label(master=labelframe, text="Eind bestemming", font=('Helvetica', 16, 'bold'))
-    eindbestemming.grid(pady=10, row=row, column=3)
+    eindbestemming = Label(master=informatie_frame, text="Eind bestemming", font=('Helvetica', 14, 'bold'))
+    eindbestemming.grid(pady=10, row=row, column=4, sticky=W)
 
-    tussen_stops = Label(master=labelframe, text="Tussen stops", font=('Helvetica', 16, 'bold'))
-    tussen_stops.grid(pady=10, row=row, column=4)
+    tussen_stops = Label(master=informatie_frame, text="Tussen stops", font=('Helvetica', 14, 'bold'))
+    tussen_stops.grid(pady=10, row=row, column=5, sticky=W)
 
-    vertraging = Label(master=labelframe, text="Vertraging", font=('Helvetica', 16, 'bold'))
-    vertraging.grid(pady=10, row=row, column=5)
+    vertraging = Label(master=informatie_frame, text="Vertraging", font=('Helvetica', 14, 'bold'))
+    vertraging.grid(pady=10, row=row, column=6, sticky=W)
 
-    reis_advies = Label(master=labelframe, text="Tips", font=('Helvetica', 16, 'bold'))
-    reis_advies.grid(pady=10, row=row, column=6)
+    reis_advies = Label(master=informatie_frame, text="Tips", font=('Helvetica', 14, 'bold'))
+    reis_advies.grid(pady=10, row=row, column=7, sticky=W)
 
-    opmerking = Label(master=labelframe, text="Opmerkingen", font=('Helvetica', 16, 'bold'))
-    opmerking.grid(pady=10, row=row, column=7)
+    opmerking = Label(master=informatie_frame, text="Opmerkingen", font=('Helvetica', 14, 'bold'))
+    opmerking.grid(pady=10, row=row, column=8, sticky=W)
 
     reis_informatie_lijst = hudige_vertrek_station()
     for reis_informatie in reis_informatie_lijst:
-        row = row + 1 
-        vertrektijd = Label(master=labelframe, text=reis_informatie[0], font=('Helvetica', 16))
+        row = row + 1
+        vertrektijd = Label(master=informatie_frame, text=reis_informatie[0], font=('Helvetica', 12))
         vertrektijd.grid(pady=10, row=row, column=1)
 
-        spoor = Label(master=labelframe, text=reis_informatie[1], font=('Helvetica', 16))
-        spoor.grid(pady=10, row=row, column=2)
+        spoor = Label(master=informatie_frame, text=reis_informatie[1], font=('Helvetica', 12))
+        spoor.grid(pady=10, row=row, column=2, )
 
-        type_trein = Label(master=labelframe, text=reis_informatie[2], font=('Helvetica', 16))
-        type_trein.grid(pady=10, row=row, column=2)
+        type_trein = Label(master=informatie_frame, text=reis_informatie[2], font=('Helvetica', 12))
+        type_trein.grid(pady=10, row=row, column=3, sticky=W)
 
-        eindbestemming = Label(master=labelframe, text=reis_informatie[3], font=('Helvetica', 16))
-        eindbestemming.grid(pady=10, row=row, column=3)
+        eindbestemming = Label(master=informatie_frame, text=reis_informatie[3], font=('Helvetica', 12))
+        eindbestemming.grid(pady=10, row=row, column=4, sticky=W)
 
-        tussen_stops = Label(master=labelframe, text=reis_informatie[4], font=('Helvetica', 16))
-        tussen_stops.grid(pady=10, row=row, column=4)
+        tussen_stops = Label(master=informatie_frame, text=reis_informatie[4], font=('Helvetica', 12))
+        tussen_stops.grid(pady=10, row=row, column=5, sticky=W)
 
-        vertraging = Label(master=labelframe, text=reis_informatie[5], font=('Helvetica', 16))
-        vertraging.grid(pady=10, row=row, column=5)
+        vertraging = Label(master=informatie_frame, text=reis_informatie[5], font=('Helvetica', 12))
+        vertraging.grid(pady=10, row=row, column=6, sticky=W)
 
-        reis_advies = Label(master=labelframe, text=reis_informatie[6], font=('Helvetica', 16))
-        reis_advies.grid(pady=10, row=row, column=6)
+        reis_advies = Label(master=informatie_frame, text=reis_informatie[6], font=('Helvetica', 12))
+        reis_advies.grid(pady=10, row=row, column=7, sticky=W)
 
-        opmerking = Label(master=labelframe, text=reis_informatie[7], font=('Helvetica', 16))
-        opmerking.grid(pady=10, row=row, column=7)
+        opmerking = Label(master=informatie_frame, text=reis_informatie[7], font=('Helvetica', 12))
+        opmerking.grid(pady=10, row=row, column=8, sticky=W)
+
 # def huidge station
 
 def ander_station():
