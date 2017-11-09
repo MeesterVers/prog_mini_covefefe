@@ -4,12 +4,9 @@ from main import *
 
 root = Tk()     #creeer het hoofdscherm
 root.geometry("1200x700")           #zet de grootte van de window
-root.resizable(width=True, height=True)       #zorgt ervoor dat de grootte niet aangepast kan worden
-
-def labelkleur():
-    label.config(bg=yellow)
-
-
+root.resizable(width=False, height=False)       #zorgt ervoor dat de grootte niet aangepast kan worden
+root.title("Mini Project")
+root.configure(background='white')
 def huidige_station():
     row = 0
     root.configure()
@@ -18,22 +15,21 @@ def huidige_station():
     buttonframe.pack_forget()
     labelframe.pack()
 
+    informatie_frame = Frame(master=root, bg='white')
+    informatie_frame.pack(side=LEFT, padx=20,)
 
-    informatie_frame = Frame(master=root)
-    informatie_frame.pack(side=LEFT, padx=20)
+    #button3.pack()
 
-    # button3.pack()
-
-    vertrektijd = Label(master=informatie_frame, text="Tijd", font=('Helvetica', 14, 'bold'))
+    vertrektijd = Label(master=informatie_frame, text="Tijd", font=('Helvetica', 14, 'bold'), bg='white')
     vertrektijd.grid(pady=30, padx=40, row=row, column=1)
 
-    eindbestemming = Label(master=informatie_frame, text="Naar", font=('Helvetica', 14, 'bold'))
+    eindbestemming = Label(master=informatie_frame, text="Naar", font=('Helvetica', 14, 'bold'), bg='white')
     eindbestemming.grid(pady=30, padx=50, row=row, column=2, sticky=W)
 
-    type_trein = Label(master=informatie_frame, text="Vervoerder", font=('Helvetica', 14, 'bold'))
+    type_trein = Label(master=informatie_frame, text="Vervoerder", font=('Helvetica', 14, 'bold'), bg='white')
     type_trein.grid(pady=30, padx=50, row=row, column=3, sticky=W)
 
-    spoor = Label(master=informatie_frame, text="Spoor", font=('Helvetica', 14, 'bold'))
+    spoor = Label(master=informatie_frame, text="Spoor", font=('Helvetica', 14, 'bold'), bg='white')
     spoor.grid(pady=30, padx=40, row=row, column=4, sticky=W)
 
     #vertraging = Label(master=informatie_frame, text="Vertraging", font=('Helvetica', 14, 'bold'))
@@ -51,16 +47,18 @@ def huidige_station():
     reis_informatie_lijst = hudige_vertrek_station()
     for reis_informatie in reis_informatie_lijst:
         row = row + 1
-        vertrektijd = Label(master=informatie_frame, text=reis_informatie[0] + '\n' + reis_informatie[5], font=('Helvetica', 12))
+
+
+        vertrektijd = Label(master=informatie_frame, text=reis_informatie[0] + '\n' + reis_informatie[5], font=('Helvetica', 12), bg='white', fg='#01579B')
         vertrektijd.grid(pady=5, padx=40, row=row, column=1)
 
-        eindbestemming = Label(master=informatie_frame, text=reis_informatie[3] + '\n' + reis_informatie[4] + '\n' + reis_informatie[6] + '\n' + reis_informatie[7], font=('Helvetica', 12))
+        eindbestemming = Label(master=informatie_frame, text=reis_informatie[3] + '\n' + reis_informatie[4] + '\n' + reis_informatie[6] + '\n' + reis_informatie[7], font=('Helvetica', 12), bg='white')
         eindbestemming.grid(pady=5, padx=50, row=row, column=2, sticky=W)
 
-        type_trein = Label(master=informatie_frame, text=reis_informatie[2], font=('Helvetica', 12))
+        type_trein = Label(master=informatie_frame, text=reis_informatie[2], font=('Helvetica', 12), bg='white')
         type_trein.grid(pady=5, padx=50, row=row, column=3, sticky=W)
 
-        spoor = Label(master=informatie_frame, text=reis_informatie[1], font=('Helvetica', 12))
+        spoor = Label(master=informatie_frame, text=reis_informatie[1], font=('Helvetica', 12), bg='white')
         spoor.grid(pady=10, padx=40, row=row, column=4)
 
 
@@ -114,16 +112,16 @@ render3 = ImageTk.PhotoImage(AnderStationImage)
 img = Label(master=root, image=render1)
 img.place(x=0,y=0)
 
-label= Label(master=root,text='Reisinformatie Terminal',foreground='blue')
+label= Label(master=root,text='Reisinformatie Terminal', foreground='blue')
 label.pack()
 
 
-buttonframe = Frame(master=root)
+buttonframe = Frame(master=root, bg='#FDD037')
 buttonframe.pack(side=LEFT)
-button1 = Button(master=buttonframe, image=render2, command=huidige_station)
-button1.grid(row=0,column=0,padx=50)
-button2 = Button(master=buttonframe, image=render3,command=ander_station)
-button2.grid(row=1,column=0,padx=50)
+button1 = Button(master=buttonframe, image=render2, command=huidige_station, bg='#FDD037')
+button1.grid(row=0,column=0,padx=35, pady='10')
+button2 = Button(master=buttonframe, image=render3,command=ander_station, bg='#FDD037')
+button2.grid(row=1,column=0,padx=35, pady='10')
 button3 = Button(master=root, text='Terug',command=terug)
 
 label5 = Label(master=root, text='Voer het station in vanaf waar U de vertrekinformatie wilt.',foreground='blue')
