@@ -7,18 +7,11 @@ root.geometry("1200x700")           #zet de grootte van de window
 root.resizable(width=False, height=False)       #zorgt ervoor dat de grootte niet aangepast kan worden
 root.title("Mini Project")
 root.configure(background='white')
-def huidige_station():
-    row = 0
-    root.configure()
-    label.pack_forget()
-    img.place_forget()
-    buttonframe.pack_forget()
-    labelframe.pack()
 
+def output_reis_informatie(reis_informatie_lijst):
+    row = 0
     informatie_frame = Frame(master=root, bg='white')
     informatie_frame.pack(side=LEFT, padx=20,)
-
-    #button3.pack()
 
     vertrektijd = Label(master=informatie_frame, text="Tijd", font=('Helvetica', 14, 'bold'), bg='white')
     vertrektijd.grid(pady=30, padx=40, row=row, column=1)
@@ -32,22 +25,10 @@ def huidige_station():
     spoor = Label(master=informatie_frame, text="Spoor", font=('Helvetica', 14, 'bold'), bg='white')
     spoor.grid(pady=30, padx=40, row=row, column=4, sticky=W)
 
-    #vertraging = Label(master=informatie_frame, text="Vertraging", font=('Helvetica', 14, 'bold'))
-    #vertraging.grid(pady=30, row=row, column=5, sticky=W)
+    button3.pack()
 
-    #tussen_stops = Label(master=informatie_frame, text="Tussen stops", font=('Helvetica', 14, 'bold'))
-    #tussen_stops.grid(pady=10, row=row, column=5, sticky=W)
-
-    # reis_advies = Label(master=informatie_frame, text="Tips", font=('Helvetica', 14, 'bold'))
-    # reis_advies.grid(pady=10, row=row, column=7, sticky=W)
-    #
-    # opmerking = Label(master=informatie_frame, text="Opmerkingen", font=('Helvetica', 14, 'bold'))
-    # opmerking.grid(pady=10, row=row, column=8, sticky=W)
-
-    reis_informatie_lijst = hudige_vertrek_station()
     for reis_informatie in reis_informatie_lijst:
         row = row + 1
-
 
         vertrektijd = Label(master=informatie_frame, text=reis_informatie[0] + '\n' + reis_informatie[5], font=('Helvetica', 12), bg='white', fg='#01579B')
         vertrektijd.grid(pady=5, padx=40, row=row, column=1)
@@ -60,19 +41,17 @@ def huidige_station():
 
         spoor = Label(master=informatie_frame, text=reis_informatie[1], font=('Helvetica', 12), bg='white')
         spoor.grid(pady=10, padx=40, row=row, column=4)
+# def print_reis_informatie
 
+def huidige_station():
+    root.configure()
+    label.pack_forget()
+    img.place_forget()
+    buttonframe.pack_forget()
+    labelframe.pack()
 
-        #vertraging = Label(master=informatie_frame, text=, font=('Helvetica', 12))
-        #vertraging.grid(pady=10, row=row, column=6, sticky=W)
-
-        # tussen_stops = Label(master=informatie_frame, text=reis_informatie[4], font=('Helvetica', 12))
-        # tussen_stops.grid(pady=10, row=row, column=5, sticky=W)
-
-        # reis_advies = Label(master=informatie_frame, text=reis_informatie[6], font=('Helvetica', 12))
-        # reis_advies.grid(pady=10, row=row, column=7, sticky=W)
-        # opmerking = Label(master=informatie_frame, text=reis_informatie[7], font=('Helvetica', 12))
-        # opmerking.grid( row=row, column=8, sticky=W)
-
+    reis_informatie_lijst = hudige_vertrek_station()
+    output_reis_informatie(reis_informatie_lijst)
 # def huidge station
 
 def ander_station():
@@ -82,6 +61,7 @@ def ander_station():
     label5.pack()
     entry1.pack()
     button3.pack()
+# def ander_station
 
 def clicked():
     label.pack_forget()
