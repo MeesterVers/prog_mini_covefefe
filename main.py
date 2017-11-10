@@ -81,20 +81,6 @@ def get_vertrek_informatie(station):  # Haalt de actuele NS reisinformatie
 
         reis_informatie = [vertrektijd, vertrekspoor, type_trein, eindbestemming, trein_tussen_stops, vertrek_vertraging_tekst, reis_tip,opmerkingen]
         reis_informatie_lijst.append(reis_informatie)
-    # for reis_informatie in reis_informatie_lijst:
-    #     # print(reis_informatie)
-    #     print("\n")
-    #     print("Vertrektijd:" + reis_informatie[0])
-    #     print("Spoor:" + reis_informatie[1])
-    #     print("Trein type:" + reis_informatie[2])
-    #     print("Eindbestemming:" + reis_informatie[3])
-    #     print("Tussen stops:" + reis_informatie[4])
-    #     if reis_informatie[5] != "":
-    #         print("vertraging: " + reis_informatie[5])
-    #     if reis_informatie[6] != "":
-    #         print("Reis advies: " + reis_informatie[6])
-    #     if reis_informatie[7] != "":
-    #         print("Opmerking: " + reis_informatie[7])
     return reis_informatie_lijst
 # einde get_vertrek_informatie def
 
@@ -107,7 +93,6 @@ def hudige_vertrek_station():
 # get_hudige_station def
 
 def ander_vertrek_station(user_station, request_status):
-
     if request_status == "bad":
         mogelijke_stations = []
         auth_details = ('max.bosch@student.hu.nl', '9bftbs4MpvNZ2Q-WJe70aKE1c3gm4Kef23ekTq6r9-U8ddVTNWUkYw') # Inloggegevens API
@@ -122,9 +107,4 @@ def ander_vertrek_station(user_station, request_status):
 
     elif request_status == "good":
         return get_vertrek_informatie(user_station)
-    print(mogelijke_stations)
-    
 # einde ander_vertrek_station def
-
-# hudige_vertrek_station() #reis informatie hudige vertrek station werkt met settings file.. staat nu op utrecht.. settings md5 encrypten??
-# ander_vertrek_station()  #reis informatie andere vertrek station
