@@ -23,7 +23,7 @@ Om de applicatie te installeren moet u de volgende stappen uitvoeren. Om te kunn
 	-`requests`<br>
 	-`xmltodict`<br>
 
-4. De `boot.py` is de file die uw moet **Runnen** om de applicatie te kunnen gebruiken.
+4. De `boot.py` is de file die u moet **Runnen** om de applicatie te kunnen gebruiken.
 
 5. De `main.py` is de ondersteunde file, hier in zitten alle functies zoals API calls enz. De functies in de `main.py` returnen altijd lijsten met data naar de **GUI**
 
